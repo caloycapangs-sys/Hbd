@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Palangga 💖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a1c4fd);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  cursor: pointer;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.18);
+  padding: 40px 35px;
+  border-radius: 30px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  border: 1px solid rgba(255,255,255,0.3);
+  animation: cardPop 2s ease forwards;
+}
+
+@keyframes cardPop {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 3.2em;
+  margin-bottom: 15px;
+  color: #fff;
+  text-shadow: 2px 2px 15px rgba(0,0,0,0.25);
+  animation: pop 1s ease;
+}
+
+h2 {
+  font-size: 2em;
+  color: #ffe3e3;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+p {
+  font-size: 1.15em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  opacity: 0;
+  animation: fadeInText 3s ease forwards;
+  animation-delay: 0.5s;
+}
+
+footer {
+  margin-top: 25px;
+  font-size: 0.95em;
+  color: #fff;
+  opacity: 0.9;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Typing effect */
+.typing {
+  border-right: .1em solid rgba(255,255,255,0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: typing 4s steps(50, end), blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  from, to { border-color: transparent; }
+  50% { border-color: rgba(255,255,255,0.8); }
+}
+
+/* Fireworks */
+.firework {
+  position: absolute;
+  font-size: 1.5em;
+  opacity: 0;
+  pointer-events: none;
+  animation: fireworkAnim 2s forwards;
+}
+
+@keyframes fireworkAnim {
+  0% { transform: translate(0,0) scale(0.3); opacity: 1; }
+  100% { transform: translate(var(--x), var(--y)) scale(1); opacity: 0; }
+}
+
+/* Background floating hearts, sparkles, confetti */
+.sparkle, .floating-heart, .confetti {
+  position: absolute;
+  font-size: 1em;
+  opacity: 0.8;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Happy Birthday 🎉</h1>
+  <h2 class="typing">MY PALANGGA 💖</h2>
+
+  <p>
+    On this special day, I just want you to know how grateful I am to have you.
+    You are my happiness, my comfort, and my favorite person.
+    May your day be filled with love, smiles, and everything your heart desires.
+  </p>
+
+  <p>
+    I promise to love you in ways that I know,
+    and in ways you deserve — today and always.
+  </p>
+
+  <footer>
+    Forever yours,<br>
+    <strong>John Carlo 💖</strong>
+  </footer>
+</div>
+
+<audio id="music" autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-buddy.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const colors = ['❤️','💖','💗','💓','💘','✨','🎉','🌟'];
+
+function createFirework(x, y){
+  for(let i=0;i<20;i++){
+    const span=document.createElement('div');
+    span.classList.add('firework');
+    span.style.left=x+'px';
+    span.style.top=y+'px';
+    const angle=Math.random()*2*Math.PI;
+    const distance=Math.random()*120+50;
+    const dx=Math.cos(angle)*distance+'px';
+    const dy=Math.sin(angle)*distance+'px';
+    span.style.setProperty('--x',dx);
+    span.style.setProperty('--y',dy);
+    span.textContent=colors[Math.floor(Math.random()*colors.length)];
+    document.body.appendChild(span);
+    setTimeout(()=>span.remove(),2000);
+  }
+}
+
+// Background particles
+function createBackgroundParticles(){
+  for(let i=0;i<50;i++){
+    const heart=document.createElement('div');
+    heart.classList.add('floating-heart');
+    heart.style.left=Math.random()*window.innerWidth+'px';
+    heart.style.fontSize=(Math.random()*20+15)+'px';
+    heart.textContent=colors[Math.floor(Math.random()*5)];
+    heart.style.animationDuration=(Math.random()*5+5)+'s';
+    document.body.appendChild(heart);
+
+    const sparkle=document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.style.left=Math.random()*window.innerWidth+'px';
+    sparkle.style.fontSize=(Math.random()*15+10)+'px';
+    sparkle.textContent=colors[Math.floor(Math.random()*colors.length)];
+    sparkle.style.animationDuration=(Math.random()*8+5)+'s';
+    document.body.appendChild(sparkle);
+
+    const confetti=document.createElement('div');
+    confetti.classList.add('confetti');
+    confetti.style.left=Math.random()*window.innerWidth+'px';
+    confetti.style.fontSize=(Math.random()*20+10)+'px';
+    confetti.textContent=['🎉','🎊','💫','🌟'][Math.floor(Math.random()*4)];
+    confetti.style.animationDuration=(Math.random()*6+4)+'s';
+    document.body.appendChild(confetti);
+  }
+}
+
+window.addEventListener('load',()=>{
+  createBackgroundParticles();
+  const centerX=window.innerWidth/2;
+  const centerY=window.innerHeight/2;
+  createFirework(centerX,centerY);
+});
+
+// Fireworks on click + play music if paused
+window.addEventListener('click',(e)=>{
+  createFirework(e.clientX,e.clientY);
+  const music=document.getElementById('music');
+  if(music.paused) music.play();
+});
+</script>
+
+</body>
+</html>
